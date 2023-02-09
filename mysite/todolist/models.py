@@ -12,6 +12,7 @@ class Uzduotis(models.Model):
     class Meta:
         verbose_name = "Užduotis"
         verbose_name_plural ='Užduotys'
+        ordering = ['-created']
 
 
 
