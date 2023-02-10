@@ -9,7 +9,8 @@
   {% for uzduotis in uzduotys %}
 <hr>
     <p><b>{{uzduotis.text}} </b></p>
-    <p>{{uzduotis.created}}</p>
+    <p>{{uzduotis.created}} {{uzduotis.pk}} </p>
+
     {% endfor %}
 
 {% endblock %}

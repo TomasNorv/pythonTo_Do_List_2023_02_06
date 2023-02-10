@@ -35,7 +35,7 @@
         <a class="nav-link" href="{% url 'sukurtos_užduotys' %}">Sukurtos užduotys </a>
 
  {% if user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="#">Sukurti užduotį</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'user_užduotį_sukurti' %}">Sukurti užduotį</a></li>
       <li class="nav-item"><a class="nav-link" href="{% url 'user_užduotys' %}">Mano užduotys</a></li>
 
          <li class="nav-item"><a class="nav-link" href="#">

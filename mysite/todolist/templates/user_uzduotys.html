@@ -3,13 +3,20 @@
 
 {% block content %}
 <ul></ul>
- <h1>Užduotys</h1>
+ <h1>Mano Užduotys</h1>
 <ul></ul>
   <p><b>Užduočių sąrašas :</b></p>
   {% for uzduotis in uzduotys %}
 <hr>
     <p><b>{{uzduotis.user}} - {{uzduotis.text}} </b></p>
     <p>{{uzduotis.created}}</p>
+
+
+            {% if uzduotis.user == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user_užduotį_redaguoti' uzduotis.id %}">Redaguoti</a>
+            </div>
+            {% endif %}
     {% endfor %}
 
 {% endblock %}

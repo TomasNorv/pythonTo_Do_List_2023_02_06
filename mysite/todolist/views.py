@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse
 from .models import Uzduotis
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, CreateView, UpdateView
 # Create your views here.
 def index(request):
     num_Uzduotis = Uzduotis.objects.all().count()
@@ -30,4 +30,31 @@ class UserUzduotisListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return Uzduotis.objects.filter(user=self.request.user)
 
+class UserUzduotisCreateView(LoginRequiredMixin, CreateView):
+    model = Uzduotis
+    fields = ['text']
+    template_name = 'user_uzduotys_form.html'
 
+    def get_success_url(self):
+        return reverse('user_užduotys')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+class UserUzduotisUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Uzduotis
+    fields = ['text']
+    template_name = 'user_uzduotys_form.html'
+
+    def get_success_url(self):
+        return reverse('user_užduotys')
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+    def test_func(self):
+        uzduotis = self.get_object()
+        return self.request.user == uzduotis.user
