@@ -15,6 +15,7 @@
             {% if uzduotis.user == user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'user_užduotį_redaguoti' uzduotis.id %}">Redaguoti</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'user_užduotį_ištrinti' uzduotis.id %}">Ištrinti</a>
             </div>
             {% endif %}
     {% endfor %}
